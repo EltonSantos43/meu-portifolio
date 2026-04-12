@@ -5,5 +5,10 @@
         "source": "/api/chat",
         "destination": "/backend/server.js"
     }
-    ]
+    ],
+    "functions": {
+    "backend/server.js": {
+        "runtime": "vercel-node@latest"
+    }
+    }
 }
