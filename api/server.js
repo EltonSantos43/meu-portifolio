@@ -7,6 +7,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // --- CAMADA DE SEGURANÇA (BLINDAGEM) ---
 app.use(helmet()); // Blindagem de headers contra exploits comuns
 app.use(cors());   // Permite que seu frontend acesse o backend
