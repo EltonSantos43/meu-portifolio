@@ -189,25 +189,33 @@
 
             // DETECÇÃO DINÂMICA DE AMBIENTE
             const api_url = window.location.hostname === 'localhost' 
-                ? 'http://localhost:3000/chat' 
+                ? 'http://localhost:3000/' // Localhost geralmente usa a raiz no teste direto
                 : '/api/chat';
 
             try {
                 const res = await fetch(api_url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify({ mensagem: pergunta })
                 });
+
                 const data = await res.json();
                 
-                // Trata erro de limite (Rate Limit) da blindagem
-                if (data.error || data.message) {
-                    textDiv.innerText = data.message || data.error;
-                } else {
-                    textDiv.innerText = data.resposta;
+                // Se a resposta não for OK (ex: erro 429 de excesso de perguntas ou 500)
+                if (!res.ok) {
+                    textDiv.innerText = data.resposta || data.error || "Ocorreu um erro na requisição.";
+                    return;
                 }
+                
+                // Se tudo estiver certo, exibe a resposta da IA
+                textDiv.innerText = data.resposta;
+
             } catch (err) {
-                textDiv.innerText = "O servidor está offline. Tente novamente mais tarde!";
+                console.error("Erro na comunicação:", err);
+                textDiv.innerText = "O servidor está processando a requisição. Se demorar, tente novamente em instantes!";
             }
         }
 
