@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elton Santos | Backend Developer</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicon@latest/devicon.min.css">
 
@@ -23,104 +22,147 @@
             }
         }
     </script>
-
     <style>
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth;}
         .glass { background: rgba(11, 17, 32, 0.8); backdrop-filter: blur(12px); }
         .glow-effect { box-shadow: 0 0 20px rgba(81, 43, 212, 0.3); }
     </style>
 </head>
-
 <body class="bg-darkBg text-slate-300 font-sans antialiased">
 
-<header class="fixed w-full top-0 z-50 glass border-b border-slate-800">
-    <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <span class="text-lg md:text-xl font-bold text-white tracking-tighter">
-            ELTON <span class="text-dotnetBlue">SANTOS</span>
-        </span>
+    <header class="fixed w-full top-0 z-50 glass border-b border-slate-800">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-white tracking-tighter shrink-0">
+                ELTON&nbsp;<span class="text-dotnetBlue">SANTOS</span>
+            </span>
+            <div class="flex space-x-3 md:space-x-8 text-[10px] md:text-sm font-medium uppercase overflow-x-auto">
+                <a href="#sobre" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Sobre</a>
+                <a href="#projetos" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Projetos</a>
+                <a href="#ia-assistente" class="text-cyan-400 hover:brightness-110 whitespace-nowrap">IA</a>
+                <a href="#contato" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Contato</a>
+            </div>
+        </nav>
+    </header>
 
-        <div class="flex space-x-3 md:space-x-8 text-xs md:text-sm uppercase">
-            <a href="#sobre">Sobre</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#ia-assistente">IA</a>
-            <a href="#contato">Contato</a>
+    <section class="py-20 md:py-32 flex items-center pt-28 md:pt-32">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">            
+            <div>
+                <h2 class="text-dotnetBlue font-mono mb-4 font-bold">// Elton Santos</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                    Dev <span class="text-transparent bg-clip-text bg-gradient-to-r from-dotnetBlue to-cyan-400">Backend</span>
+                </h1>
+                <p class="text-lg text-slate-400 mb-8 max-w-lg">
+                    Transformando lógica em soluções de mercado. Logística e Backend com foco em performance.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projetos" class="bg-dotnetBlue hover:bg-opacity-80 text-white px-8 py-3 rounded-lg font-bold transition">Portfólio</a>
+                    <a href="https://github.com/EltonSantos43" target="_blank" class="border border-slate-700 hover:border-dotnetBlue px-8 py-3 rounded-lg transition font-bold text-white">GitHub</a>
+                </div>
+            </div>
+
+            <div class="flex justify-center relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-dotnetBlue to-cyan-500 rounded-full blur opacity-25"></div>
+                <img src="assets/img/meuperfil.jpeg" alt="Elton Santos" class="relative w-72 h-72 rounded-full object-cover object-top border-4 border-darkBg shadow-2xl">
+            </div>
         </div>
-    </nav>
-</header>
+    </section>
 
-<section class="pt-32 text-center">
-    <h1 class="text-5xl text-white font-bold">
-        Dev <span class="text-dotnetBlue">Backend</span>
-    </h1>
-</section>
-
-<!-- IA -->
-<section id="ia-assistente" class="py-20">
-    <div class="max-w-3xl mx-auto">
-
-        <input id="userInput"
-            class="w-full p-4 bg-slate-800 rounded"
-            placeholder="Pergunte algo..." />
-
-        <button onclick="perguntarIA()"
-            class="mt-3 px-6 py-3 bg-dotnetBlue text-white rounded">
-            Perguntar
-        </button>
-
-        <div id="aiResponse" class="mt-6 hidden">
-            <p id="responseText"></p>
+    <section id="sobre" class="py-24 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-3xl font-bold text-white mb-6 border-l-4 border-dotnetBlue pl-4">Sobre Mim</h3>
+            <p class="text-xl leading-relaxed text-slate-400 text-justify">
+                Sou um desenvolvedor em formação, focado em se tornar Dev Backend Sênior. Atualmente atuo na Localiza na área de Logística de alto padrão, o que me confere disciplina e foco em processos críticos. Aplico essa maturidade de mercado para criar códigos robustos com .NET, Python e Node.js.
+            </p>
         </div>
-    </div>
-</section>
+    </section>
 
-<script>
-// =======================
-// ENTER PARA ENVIAR
-// =======================
-document.getElementById('userInput')
-.addEventListener('keypress', e => {
-    if (e.key === 'Enter') perguntarIA();
-});
+    <section id="projetos" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="flex justify-between items-end mb-12">
+            <h3 class="text-3xl font-bold text-white">Repositórios</h3>
+            <a href="https://github.com/EltonSantos43" target="_blank" class="text-dotnetBlue hover:underline font-mono text-sm">Ver GitHub →</a>
+        </div>
+        <div id="github-projects" class="grid md:grid-cols-2 gap-8">
+            <p class="text-slate-500 animate-pulse">Sincronizando repositórios...</p>
+        </div>
+    </section>
 
-// =======================
-// CHAT IA SIMPLES
-// =======================
-async function perguntarIA() {
+    <section id="ia-assistente" class="py-24 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-bold text-white">Assistente de Projetos</h3>
+                <p class="text-slate-400 mt-2">Pergunte sobre minha trajetória ou stacks técnicas.</p>
+            </div>
+            
+            <div class="bg-cardBg rounded-2xl p-4 md:p-6 shadow-2xl border border-slate-700">
+                <div class="flex flex-col md:flex-row gap-3 mb-4">
+                    <input type="text" id="userInput" placeholder="Ex: Quais são seus principais projetos?" class="w-full bg-darkBg border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-dotnetBlue outline-none">
+                    <button onclick="perguntarIA()" class="w-full md:w-auto bg-dotnetBlue hover:brightness-110 text-white px-6 py-3 rounded-lg font-bold transition">Perguntar</button>
+                </div>
+                <div id="aiResponse" class="hidden mt-4 p-4 bg-darkBg rounded-lg border-l-4 border-dotnetBlue">
+                    <p id="responseText" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    const input = document.getElementById('userInput');
-    const textDiv = document.getElementById('responseText');
-    const responseDiv = document.getElementById('aiResponse');
+    <footer id="contato" class="py-24 bg-darkBg border-t border-slate-900 text-center">
+        <h2 class="text-3xl font-bold text-white mb-12">Vamos conversar?</h2>
+        <div class="flex justify-center gap-8 mb-16">
+            <a href="mailto:ecsantos.developer@gmail.com" class="text-slate-400 hover:text-white transition text-3xl"><i class="devicon-google-plain"></i></a>
+            <a href="https://linkedin.com/in/eltonclsantos/" target="_blank" class="text-slate-400 hover:text-white transition text-3xl"><i class="devicon-linkedin-plain"></i></a>
+            <a href="https://wa.me/5511967359604" target="_blank" class="text-slate-400 hover:text-white transition text-3xl"><i class="devicon-whatsapp-plain text-green-500"></i></a>
+        </div>
+        <p class="text-slate-600 font-mono text-xs uppercase tracking-widest">Elton Santos &copy; 2026</p>
+    </footer>
 
-    const pergunta = input.value.trim();
-    if (!pergunta) return;
-
-    responseDiv.classList.remove('hidden');
-    textDiv.innerText = "Carregando...";
-
-    input.value = "";
-
-    try {
-        const res = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagem: pergunta })
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-            textDiv.innerText = data.resposta || "Erro";
-            return;
+    <script>
+        // CARREGAR GITHUB
+        async function carregarProjetos() {
+            const container = document.getElementById('github-projects');
+            try {
+                const res = await fetch('https://api.github.com/users/EltonSantos43/repos?sort=updated');
+                const repos = await res.json();
+                container.innerHTML = "";
+                repos.slice(0, 4).forEach(repo => {
+                    container.innerHTML += `
+                        <div class="bg-cardBg border border-slate-800 p-8 rounded-2xl hover:border-dotnetBlue transition group">
+                            <span class="text-dotnetBlue font-mono text-sm uppercase">${repo.language || 'Code'}</span>
+                            <h4 class="text-2xl font-bold text-white mt-2 mb-3">${repo.name.replace(/-/g, ' ')}</h4>
+                            <a href="${repo.html_url}" target="_blank" class="text-white font-bold hover:text-dotnetBlue inline-flex items-center gap-2">REPOSITÓRIO →</a>
+                        </div>`;
+                });
+            } catch (err) {
+                container.innerHTML = "<p class='text-red-400'>Erro ao carregar GitHub.</p>";
+            }
         }
 
-        textDiv.innerText = data.resposta;
+        // LÓGICA IA
+        document.getElementById('userInput').addEventListener('keypress', e => { if (e.key === 'Enter') perguntarIA(); });
 
-    } catch (err) {
-        console.error(err);
-        textDiv.innerText = "Erro ao conectar com o servidor.";
-    }
-}
-</script>
+        async function perguntarIA() {
+            const input = document.getElementById('userInput');
+            const textDiv = document.getElementById('responseText');
+            const responseDiv = document.getElementById('aiResponse');
+            const pergunta = input.value.trim();
+            if (!pergunta) return;
 
+            responseDiv.classList.remove('hidden');
+            textDiv.innerHTML = "<span class='animate-pulse'>Consultando base de dados...</span>";
+            input.value = "";
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensagem: pergunta })
+                });
+                const data = await res.json();
+                textDiv.innerText = data.resposta || data.error || "Sem resposta.";
+            } catch (err) {
+                textDiv.innerText = "Erro ao conectar. O servidor pode estar reiniciando.";
+            }
+        }
+        carregarProjetos();
+    </script>
 </body>
 </html>
