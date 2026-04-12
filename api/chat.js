@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // 🔥 DEBUG (remove depois se quiser)
+  // Verifica API KEY
   if (!process.env.GEMINI_API_KEY) {
     return res.status(500).json({
       error: "API KEY não encontrada na Vercel"
@@ -85,11 +85,12 @@ Pergunta: ${mensagem}
 `;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "X-goog-api-key": process.env.GEMINI_API_KEY
         },
         body: JSON.stringify({
           contents: [
@@ -104,9 +105,8 @@ Pergunta: ${mensagem}
 
     const data = await response.json();
 
-    // 🔥 LOG COMPLETO PRA DEBUG
     if (!response.ok) {
-      console.error("ERRO GEMINI COMPLETO:", JSON.stringify(data, null, 2));
+      console.error("ERRO GEMINI:", JSON.stringify(data, null, 2));
 
       return res.status(500).json({
         error: "Erro na API Gemini",
@@ -115,7 +115,7 @@ Pergunta: ${mensagem}
     }
 
     const texto =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ??
       "Sem resposta da IA.";
 
     return res.status(200).json({
