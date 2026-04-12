@@ -154,8 +154,8 @@
                 const res = await fetch('https://api.github.com/users/EltonSantos43/repos?sort=updated');
                 const repos = await res.json();
                 container.innerHTML = "";
-                // Mostra os 4 projetos mais recentes que não sejam o do próprio portfólio
-                repos.filter(r => r.name !== 'meu-portfolio').slice(0, 4).forEach(repo => {
+                // Filtra o repositório do portfólio (usando o nome correto com 'i')
+                repos.filter(r => r.name !== 'meu-portifolio').slice(0, 4).forEach(repo => {
                     container.innerHTML += `
                         <div class="bg-cardBg border border-slate-800 p-8 rounded-2xl hover:border-dotnetBlue transition duration-300 group">
                             <span class="text-dotnetBlue font-mono text-sm uppercase">${repo.language || 'Code'}</span>
@@ -172,7 +172,7 @@
             }
         }
 
-        // --- 2. LÓGICA DO ASSISTENTE IA ---
+        // --- 2. LÓGICA DO ASSISTENTE IA (BLINDAGEM CI/CD) ---
         const inputField = document.getElementById('userInput');
         inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') perguntarIA(); });
 
@@ -187,20 +187,30 @@
             textDiv.innerHTML = "<span class='animate-pulse'>Analisando stack do Elton...</span>";
             input.value = ""; 
 
+            // DETECÇÃO DINÂMICA DE AMBIENTE
+            const api_url = window.location.hostname === 'localhost' 
+                ? 'http://localhost:3000/chat' 
+                : '/api/chat';
+
             try {
-                const res = await fetch('http://localhost:3000/chat', {
+                const res = await fetch(api_url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ mensagem: pergunta })
                 });
                 const data = await res.json();
-                textDiv.innerText = data.resposta;
+                
+                // Trata erro de limite (Rate Limit) da blindagem
+                if (data.error || data.message) {
+                    textDiv.innerText = data.message || data.error;
+                } else {
+                    textDiv.innerText = data.resposta;
+                }
             } catch (err) {
-                textDiv.innerText = "Conexão com o servidor falhou. O Elton está com o backend desligado no momento!";
+                textDiv.innerText = "O servidor está offline. Tente novamente mais tarde!";
             }
         }
 
-        // Inicia o carregamento dos projetos ao abrir a página
         carregarProjetos();
     </script>
 </body>
