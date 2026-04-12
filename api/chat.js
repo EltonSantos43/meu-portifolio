@@ -1,8 +1,3 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-// Inicializa IA
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
 // Controle simples de rate limit (em memória - básico)
 const requests = new Map();
 
@@ -42,7 +37,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // ✅ CORREÇÃO AQUI (parse seguro do body)
+  // Parse seguro do body
   let body;
 
   try {
@@ -63,10 +58,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.0-pro"
-    });
-
     const contexto = `
 Você é o Assistente Virtual do Elton Santos.
 
@@ -87,18 +78,46 @@ REGRAS:
 Pergunta: ${mensagem}
 `;
 
-    const result = await model.generateContent(contexto);
-    const response = await result.response;
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: contexto }]
+            }
+          ]
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("ERRO API GEMINI:", data);
+      return res.status(500).json({
+        error: "Erro na API Gemini",
+        detalhe: data
+      });
+    }
+
+    const texto =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sem resposta da IA.";
 
     return res.status(200).json({
-      resposta: response.text()
+      resposta: texto
     });
 
   } catch (error) {
-    console.error("ERRO GEMINI:", error);
+    console.error("ERRO GERAL:", error);
 
     return res.status(500).json({
-      error: "Erro interno no servidor de IA",
+      error: "Erro interno no servidor",
       detalhe: error.message
     });
   }
