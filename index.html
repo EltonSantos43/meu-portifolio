@@ -31,20 +31,20 @@
 <body class="bg-darkBg text-slate-300 font-sans antialiased">
 
     <header class="fixed w-full top-0 z-50 glass border-b border-slate-800">
-        <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-xl font-bold text-white tracking-tighter">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-white tracking-tighter shrink-0">
                 ELTON&nbsp;<span class="text-dotnetBlue">SANTOS</span>
             </span>
-            <div class="hidden md:flex space-x-8 text-sm font-medium uppercase">
-                <a href="#sobre" class="hover:text-dotnetBlue transition">Sobre</a>
-                <a href="#projetos" class="hover:text-dotnetBlue transition">Projetos</a>
-                <a href="#ia-assistente" class="text-cyan-400 hover:brightness-110">Assistente IA</a>
-                <a href="#contato" class="hover:text-dotnetBlue transition">Contato</a>
+            <div class="flex space-x-3 md:space-x-8 text-[10px] md:text-sm font-medium uppercase overflow-x-auto">
+                <a href="#sobre" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Sobre</a>
+                <a href="#projetos" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Projetos</a>
+                <a href="#ia-assistente" class="text-cyan-400 hover:brightness-110 whitespace-nowrap">IA</a>
+                <a href="#contato" class="hover:text-dotnetBlue transition whitespace-nowrap text-slate-300">Contato</a>
             </div>
         </nav>
     </header>
 
-    <section class="py-32 flex items-center pt-32">
+    <section class="py-20 md:py-32 flex items-center pt-28 md:pt-32">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">            
             <div>
                 <h2 class="text-dotnetBlue font-mono mb-4 font-bold">// Elton Santos</h2>
@@ -98,21 +98,21 @@
                 <p class="text-slate-400 mt-2">Pergunte sobre minha trajetória ou tecnologias.</p>
             </div>
             
-            <div class="bg-cardBg rounded-2xl p-6 shadow-2xl border border-slate-700">
-                <div class="flex gap-3 mb-4">
+            <div class="bg-cardBg rounded-2xl p-4 md:p-6 shadow-2xl border border-slate-700">
+                <div class="flex flex-col md:flex-row gap-3 mb-4">
                     <input type="text" id="userInput" 
                         placeholder="Ex: O que você faz na Localiza?" 
-                        class="flex-1 bg-darkBg border border-slate-700 rounded-lg 
-                            px-4 py-3 text-white focus:border-dotnetBlue outline-none">
+                        class="w-full bg-darkBg border border-slate-700 rounded-lg 
+                            px-4 py-3 text-white focus:border-dotnetBlue outline-none text-sm md:text-base">
+                    
                     <button onclick="perguntarIA()" 
-                        class="bg-dotnetBlue hover:brightness-110 text-white 
-                            px-6 py-3 rounded-lg font-bold transition">
+                        class="w-full md:w-auto bg-dotnetBlue hover:brightness-110 text-white 
+                            px-6 py-3 rounded-lg font-bold transition whitespace-nowrap">
                         Perguntar
                     </button>
                 </div>
-                <div id="aiResponse" class="hidden mt-4 p-4 bg-darkBg rounded-lg 
-                border-l-4 border-dotnetBlue">
-                    <p id="responseText" class="text-slate-300 leading-relaxed"></p>
+                <div id="aiResponse" class="hidden mt-4 p-4 bg-darkBg rounded-lg border-l-4 border-dotnetBlue">
+                    <p id="responseText" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
                 </div>
             </div>
         </div>

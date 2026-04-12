@@ -20,12 +20,12 @@ const limiter = rateLimit({
 });
 
 // Aplica a trava de segurança apenas na rota do chat
-app.use('/chat', limiter);
+app.use('/', limiter);
 // ----------------------------------------
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-app.post('/chat', async (req, res) => {
+app.post('/', async (req, res) => {
     // Sanitização: Protege contra textos excessivamente longos (max 500 caracteres)
     const mensagemBruta = req.body.mensagem || "";
     const mensagem = mensagemBruta.toString().substring(0, 500);
@@ -72,3 +72,5 @@ Pergunta do usuário: ${mensagem}`;
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor Blindado rodando em http://localhost:${PORT}`));
+
+module.exports = app;
