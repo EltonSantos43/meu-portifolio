@@ -3,12 +3,7 @@
     "rewrites": [
     {
         "source": "/api/chat",
-        "destination": "/backend/server.js"
+        "destination": "/api/server.js"
     }
-    ],
-    "functions": {
-    "backend/server.js": {
-        "runtime": "vercel-node@3.0.0"
-    }
-    }
+    ]
 }
