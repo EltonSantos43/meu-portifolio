@@ -23,7 +23,7 @@ function rateLimit(ip) {
 }
 
 export default async function handler(req, res) {
-  // Permite testar no navegador
+  // Teste GET
   if (req.method === "GET") {
     return res.status(200).json({ status: "API online 🚀" });
   }
@@ -32,8 +32,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método não permitido" });
   }
 
-  // Pega IP (Vercel)
+  // IP (Vercel)
   const ip = req.headers["x-forwarded-for"]?.split(",")[0] || "unknown";
+
   // Rate limit
   if (!rateLimit(ip)) {
     return res.status(429).json({
@@ -41,8 +42,18 @@ export default async function handler(req, res) {
     });
   }
 
-  // Sanitização
-  const mensagemBruta = req.body.mensagem || "";
+  // ✅ CORREÇÃO AQUI (parse seguro do body)
+  let body;
+
+  try {
+    body = typeof req.body === "string"
+      ? JSON.parse(req.body)
+      : req.body;
+  } catch {
+    body = {};
+  }
+
+  const mensagemBruta = body?.mensagem || "";
   const mensagem = mensagemBruta.toString().substring(0, 500);
 
   if (!mensagem.trim()) {
@@ -53,7 +64,7 @@ export default async function handler(req, res) {
 
   try {
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash"
+      model: "gemini-1.5-flash-latest"
     });
 
     const contexto = `
@@ -80,14 +91,15 @@ Pergunta: ${mensagem}
     const response = await result.response;
 
     return res.status(200).json({
-        resposta: response.text()
+      resposta: response.text()
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("ERRO GEMINI:", error);
 
     return res.status(500).json({
-      error: "Erro interno no servidor de IA"
+      error: "Erro interno no servidor de IA",
+      detalhe: error.message
     });
   }
 }
