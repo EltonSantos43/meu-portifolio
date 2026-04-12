@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elton Santos | Backend Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicon@latest/devicon.min.css">
+
+    <script>
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b1120',
+                        cardBg: '#1e293b',
+                        dotnetBlue: '#512bd4',
+                        pythonGreen: '#3776ab'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth;}
+        .glass { background: rgba(11, 17, 32, 0.8); backdrop-filter: blur(12px); }
+        .glow-effect { box-shadow: 0 0 20px rgba(81, 43, 212, 0.3); }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-300 font-sans antialiased">
+
+    <header class="fixed w-full top-0 z-50 glass border-b border-slate-800">
+        <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-xl font-bold text-white tracking-tighter">
+                ELTON&nbsp;<span class="text-dotnetBlue">SANTOS</span>
+            </span>
+            <div class="hidden md:flex space-x-8 text-sm font-medium uppercase">
+                <a href="#sobre" class="hover:text-dotnetBlue transition">Sobre</a>
+                <a href="#projetos" class="hover:text-dotnetBlue transition">Projetos</a>
+                <a href="#ia-assistente" class="text-cyan-400 hover:brightness-110">Assistente IA</a>
+                <a href="#contato" class="hover:text-dotnetBlue transition">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="py-32 flex items-center pt-32">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">            
+            <div>
+                <h2 class="text-dotnetBlue font-mono mb-4 font-bold">// Elton Santos</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                    Dev <span class="text-transparent bg-clip-text bg-gradient-to-r from-dotnetBlue to-cyan-400">Backend</span>
+                </h1>
+                <p class="text-lg text-slate-400 mb-8 max-w-lg">
+                    Transformando lógica em soluções de mercado.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projetos" class="bg-dotnetBlue hover:bg-opacity-80 text-white px-8 py-3 rounded-lg font-bold transition">
+                        Portfólio
+                    </a>
+                    <a href="https://github.com/EltonSantos43" target="_blank" class="border border-slate-700 hover:border-dotnetBlue px-8 py-3 rounded-lg transition font-bold text-white">GitHub</a>
+                    <a href="https://linkedin.com/in/eltonclsantos/" target="_blank" class="border border-slate-700 hover:border-dotnetBlue px-8 py-3 rounded-lg transition font-bold text-white">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="flex justify-center relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-dotnetBlue to-cyan-500 rounded-full blur opacity-25"></div>
+                <img src="assets/img/meuperfil.jpeg" alt="Elton Santos" class="relative w-72 h-72 rounded-full object-cover object-top border-4 border-darkBg shadow-2xl" style="object-position: 50% 15%;">
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-slate-900/30">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-3xl font-bold text-white mb-6 border-l-4 border-dotnetBlue pl-4">
+                Sobre Mim
+            </h3>
+            <p class="text-xl leading-relaxed text-slate-400 text-justify">
+                Sou um desenvolvedor em formação, com base prática em Python e Django e experiência prévia como dev júnior. Tenho contato com várias tecnologias backend como ASP.NET, SQL e MySQL, e estou buscando consolidar meu espaço na área. Sou alguém que aprende fazendo, corre atrás de oportunidades e quer evoluir rápido na carreira. Hoje também trago vivência fora da área tech (Logística de Alto Padrão na Localiza), o que soma disciplina e visão prática. Estou focado em crescer como desenvolvedor e entrar de vez no mercado.
+            </p>
+        </div>
+    </section>
+
+    <section id="projetos" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="flex justify-between items-end mb-12">
+            <h3 class="text-3xl font-bold text-white">Projetos no GitHub</h3>
+            <a href="https://github.com/EltonSantos43" target="_blank" class="text-dotnetBlue hover:underline font-mono text-sm">Ver todos os repositórios →</a>
+        </div>
+        <div id="github-projects" class="grid md:grid-cols-2 gap-8">
+            <p class="text-slate-500 animate-pulse">Sincronizando com GitHub...</p>
+        </div>
+    </section>
+
+    <section id="ia-assistente" class="py-24 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-bold text-white">Assistente de Projetos</h3>
+                <p class="text-slate-400 mt-2">Pergunte sobre minha trajetória ou tecnologias.</p>
+            </div>
+            
+            <div class="bg-cardBg rounded-2xl p-6 shadow-2xl border border-slate-700">
+                <div class="flex gap-3 mb-4">
+                    <input type="text" id="userInput" 
+                        placeholder="Ex: O que você faz na Localiza?" 
+                        class="flex-1 bg-darkBg border border-slate-700 rounded-lg 
+                            px-4 py-3 text-white focus:border-dotnetBlue outline-none">
+                    <button onclick="perguntarIA()" 
+                        class="bg-dotnetBlue hover:brightness-110 text-white 
+                            px-6 py-3 rounded-lg font-bold transition">
+                        Perguntar
+                    </button>
+                </div>
+                <div id="aiResponse" class="hidden mt-4 p-4 bg-darkBg rounded-lg 
+                border-l-4 border-dotnetBlue">
+                    <p id="responseText" class="text-slate-300 leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-darkBg border-t border-slate-900">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Vamos conversar?</h2>
+            <p class="text-slate-400 mb-12 max-w-lg mx-auto">
+                Disponível para novos desafios em Backend e parcerias tecnológicas.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+                <a href="mailto:ecsantos.developer@gmail.com" 
+                    class="group p-8 bg-cardBg rounded-2xl border border-slate-800 hover:border-dotnetBlue transition duration-300">
+                    <i class="devicon-google-plain text-3xl mb-4 block group-hover:scale-110 transition"></i>
+                    <h4 class="text-white font-bold mb-1">E-mail</h4>
+                    <p class="text-sm text-slate-500 italic">ecsantos.developer@gmail.com</p>
+                </a>
+                <a href="https://wa.me/5511967359604" target="_blank"
+                    class="group p-8 bg-cardBg rounded-2xl border border-slate-800 hover:border-green-500 transition duration-300">
+                    <i class="devicon-whatsapp-plain text-3xl mb-4 block text-green-500 group-hover:scale-110 transition"></i>
+                    <h4 class="text-white font-bold mb-1">WhatsApp</h4>
+                    <p class="text-sm text-slate-500">Chamar agora</p>
+                </a>
+            </div>
+            <div class="pt-8 border-t border-slate-900/50">
+                <p class="text-slate-600 font-mono text-xs uppercase tracking-widest">
+                    Elton Santos &copy; 2026 | Desenvolvedor Backend
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- 1. AUTOMAÇÃO DO GITHUB ---
+        async function carregarProjetos() {
+            const container = document.getElementById('github-projects');
+            try {
+                const res = await fetch('https://api.github.com/users/EltonSantos43/repos?sort=updated');
+                const repos = await res.json();
+                container.innerHTML = "";
+                // Mostra os 4 projetos mais recentes que não sejam o do próprio portfólio
+                repos.filter(r => r.name !== 'meu-portfolio').slice(0, 4).forEach(repo => {
+                    container.innerHTML += `
+                        <div class="bg-cardBg border border-slate-800 p-8 rounded-2xl hover:border-dotnetBlue transition duration-300 group">
+                            <span class="text-dotnetBlue font-mono text-sm uppercase">${repo.language || 'Code'}</span>
+                            <h4 class="text-2xl font-bold text-white mt-2 mb-3 group-hover:text-dotnetBlue transition">${repo.name.replace(/-/g, ' ')}</h4>
+                            <p class="text-slate-400 mb-6 line-clamp-2">${repo.description || 'Acesse o repositório para ver os detalhes técnicos deste projeto backend.'}</p>
+                            <a href="${repo.html_url}" target="_blank" class="text-white font-bold hover:text-dotnetBlue inline-flex items-center gap-2">
+                                REPOSITÓRIO <i class="devicon-github-original"></i>
+                            </a>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                container.innerHTML = "<p class='text-red-400'>Não foi possível carregar os projetos do GitHub no momento.</p>";
+            }
+        }
+
+        // --- 2. LÓGICA DO ASSISTENTE IA ---
+        const inputField = document.getElementById('userInput');
+        inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') perguntarIA(); });
+
+        async function perguntarIA() {
+            const input = document.getElementById('userInput');
+            const responseDiv = document.getElementById('aiResponse');
+            const textDiv = document.getElementById('responseText');
+            const pergunta = input.value.trim();
+            if (!pergunta) return;
+
+            responseDiv.classList.remove('hidden');
+            textDiv.innerHTML = "<span class='animate-pulse'>Analisando stack do Elton...</span>";
+            input.value = ""; 
+
+            try {
+                const res = await fetch('http://localhost:3000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensagem: pergunta })
+                });
+                const data = await res.json();
+                textDiv.innerText = data.resposta;
+            } catch (err) {
+                textDiv.innerText = "Conexão com o servidor falhou. O Elton está com o backend desligado no momento!";
+            }
+        }
+
+        // Inicia o carregamento dos projetos ao abrir a página
+        carregarProjetos();
+    </script>
+</body>
+</html>
