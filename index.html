@@ -25,21 +25,21 @@
     </script>
 
     <style>
-        html { scroll-behavior: smooth;}
+        html { scroll-behavior: smooth; }
         .glass { background: rgba(11, 17, 32, 0.8); backdrop-filter: blur(12px); }
+        .glow-effect { box-shadow: 0 0 20px rgba(81, 43, 212, 0.3); }
     </style>
 </head>
 
-<body class="bg-darkBg text-slate-300 font-sans">
+<body class="bg-darkBg text-slate-300 font-sans antialiased">
 
-<!-- HEADER -->
 <header class="fixed w-full top-0 z-50 glass border-b border-slate-800">
-    <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between">
-        <span class="text-white font-bold">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <span class="text-lg md:text-xl font-bold text-white tracking-tighter">
             ELTON <span class="text-dotnetBlue">SANTOS</span>
         </span>
 
-        <div class="flex gap-4 text-sm uppercase">
+        <div class="flex space-x-3 md:space-x-8 text-xs md:text-sm uppercase">
             <a href="#sobre">Sobre</a>
             <a href="#projetos">Projetos</a>
             <a href="#ia-assistente">IA</a>
@@ -48,7 +48,6 @@
     </nav>
 </header>
 
-<!-- HERO -->
 <section class="pt-32 text-center">
     <h1 class="text-5xl text-white font-bold">
         Dev <span class="text-dotnetBlue">Backend</span>
@@ -76,24 +75,6 @@
 
 <script>
 // =======================
-// DIGITAÇÃO (EFEITO CHATGPT)
-// =======================
-function digitarTexto(elemento, texto) {
-    let i = 0;
-    elemento.innerText = "";
-
-    function escrever() {
-        if (i < texto.length) {
-            elemento.innerText += texto.charAt(i);
-            i++;
-            setTimeout(escrever, 15);
-        }
-    }
-
-    escrever();
-}
-
-// =======================
 // ENTER PARA ENVIAR
 // =======================
 document.getElementById('userInput')
@@ -102,7 +83,7 @@ document.getElementById('userInput')
 });
 
 // =======================
-// CHAT IA
+// CHAT IA SIMPLES
 // =======================
 async function perguntarIA() {
 
@@ -114,15 +95,7 @@ async function perguntarIA() {
     if (!pergunta) return;
 
     responseDiv.classList.remove('hidden');
-
-    // LOADING
-    textDiv.innerText = "Pensando";
-    let dots = 0;
-
-    const interval = setInterval(() => {
-        dots = (dots + 1) % 4;
-        textDiv.innerText = "Pensando" + ".".repeat(dots);
-    }, 400);
+    textDiv.innerText = "Carregando...";
 
     input.value = "";
 
@@ -135,18 +108,16 @@ async function perguntarIA() {
 
         const data = await res.json();
 
-        clearInterval(interval);
-
         if (!res.ok) {
-            digitarTexto(textDiv, data.resposta || "Erro");
+            textDiv.innerText = data.resposta || "Erro";
             return;
         }
 
-        digitarTexto(textDiv, data.resposta);
+        textDiv.innerText = data.resposta;
 
-    } catch {
-        clearInterval(interval);
-        digitarTexto(textDiv, "Erro de conexão");
+    } catch (err) {
+        console.error(err);
+        textDiv.innerText = "Erro ao conectar com o servidor.";
     }
 }
 </script>
