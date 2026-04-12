@@ -39,7 +39,6 @@ export default async function handler(req, res) {
 
   // Parse seguro do body
   let body;
-
   try {
     body = typeof req.body === "string"
       ? JSON.parse(req.body)
@@ -54,6 +53,13 @@ export default async function handler(req, res) {
   if (!mensagem.trim()) {
     return res.status(400).json({
       error: "Mensagem vazia não permitida."
+    });
+  }
+
+  // 🔥 DEBUG (remove depois se quiser)
+  if (!process.env.GEMINI_API_KEY) {
+    return res.status(500).json({
+      error: "API KEY não encontrada na Vercel"
     });
   }
 
@@ -88,6 +94,7 @@ Pergunta: ${mensagem}
         body: JSON.stringify({
           contents: [
             {
+              role: "user",
               parts: [{ text: contexto }]
             }
           ]
@@ -97,11 +104,13 @@ Pergunta: ${mensagem}
 
     const data = await response.json();
 
+    // 🔥 LOG COMPLETO PRA DEBUG
     if (!response.ok) {
-      console.error("ERRO API GEMINI:", data);
+      console.error("ERRO GEMINI COMPLETO:", JSON.stringify(data, null, 2));
+
       return res.status(500).json({
         error: "Erro na API Gemini",
-        detalhe: data
+        detalhe: data?.error?.message || data
       });
     }
 
