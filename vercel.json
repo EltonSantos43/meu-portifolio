@@ -8,7 +8,7 @@
     ],
     "functions": {
     "backend/server.js": {
-        "runtime": "vercel-node@latest"
+        "runtime": "vercel-node@3.0.0"
     }
     }
 }
