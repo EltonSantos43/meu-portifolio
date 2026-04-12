@@ -1,14 +1,9 @@
 {
     "version": 2,
-    "builds": [
-    { "src": "api/server.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "assets/**", "use": "@vercel/static" }
-    ],
     "rewrites": [
-    {
-        "source": "/api/chat",
-        "destination": "/api/server.js"
-    }
+        {
+            "source": "/api/chat",
+            "destination": "/api/server.js"
+        }
     ]
 }
