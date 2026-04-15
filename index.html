@@ -69,6 +69,13 @@
                     </a>
                     <a href="https://github.com/EltonSantos43" target="_blank" class="border border-slate-700 hover:border-dotnetBlue px-8 py-3 rounded-lg transition font-bold text-white">GitHub</a>
                     <a href="https://linkedin.com/in/eltonclsantos/" target="_blank" class="border border-slate-700 hover:border-dotnetBlue px-8 py-3 rounded-lg transition font-bold text-white">LinkedIn</a>
+                    
+                    <a href="assets/EltonCarlosdosSantos.pdf" download="Curriculo_Elton_Santos.pdf" class="bg-gradient-to-r from-cyan-500 to-dotnetBlue hover:brightness-110 text-white px-8 py-3 rounded-lg transition font-bold flex items-center gap-2 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download CV
+                    </a>
                 </div>
             </div>
             <div class="flex justify-center relative">
@@ -84,7 +91,7 @@
                 Sobre Mim
             </h3>
             <p class="text-xl leading-relaxed text-slate-400 text-justify">
-                Sou um desenvolvedor em formação, com base prática em Python e Django e experiência prévia como dev júnior. Tenho contato com várias tecnologias backend como ASP.NET, SQL e MySQL, e estou buscando consolidar meu espaço na área. Sou alguém que aprende fazendo, corre atrás de oportunidades e quer evoluir rápido na carreira. Hoje também trago vivência fora da área tech (Logística de Alto Padrão na Localiza), o que soma disciplina e visão prática. Estou focado em crescer como desenvolvedor e entrar de vez no mercado.
+                Desenvolvedor de Software com experiência profissional em Python e Django, atuando no desenvolvimento e manutenção de sistemas. Possuo vivência em integração de APIs, resolução de problemas e colaboração em equipes ágeis. Com sólida base teórica e prática em Análise e Desenvolvimento de Sistemas, mantenho foco constante em arquitetura back-end e bancos de dados. Estou em constante evolução técnica, buscando aprimorar minhas habilidades e contribuir com soluções eficientes e de alto valor tecnológico.
             </p>
         </div>
     </section>
@@ -153,7 +160,6 @@
     </section>
 
     <script>
-        // --- 1. AUTOMAÇÃO DO GITHUB ---
         async function carregarProjetos() {
             const container = document.getElementById('github-projects');
             try {
@@ -176,7 +182,6 @@
             }
         }
 
-        // --- 2. LÓGICA DO ASSISTENTE IA ---
         const inputField = document.getElementById('userInput');
         inputField.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') perguntarIA();
