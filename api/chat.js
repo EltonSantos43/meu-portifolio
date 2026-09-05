@@ -116,8 +116,8 @@ DIRETRIZES DE COMUNICAÇÃO:
       const timeout = setTimeout(() => controller.abort(), 8000);
 
       try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`,
+        response = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
           {
             method: "POST",
             signal: controller.signal,
