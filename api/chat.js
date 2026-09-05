@@ -60,7 +60,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // CONTEXTO PROFISSIONAL E DIRETRIZES DA PERSONA
     const systemPrompt = `Você é o Assistente Executivo e Profissional de Inteligência Artificial do portfólio de Elton Santos.
 
 SOBRE ELTON SANTOS:
@@ -72,11 +71,10 @@ SOBRE ELTON SANTOS:
 DIRETRIZES DE COMUNICAÇÃO:
 1. Tom de Voz: Extremamente profissional, cordial, focado em resultados, objetivo e corporativo.
 2. Posicionamento: Destaque a sinergia entre o conhecimento operacional em Logística e a aplicação de tecnologia/desenvolvimento Backend para solução de problemas.
-3. Aprendizado e Contextualização: Utilize as perguntas anteriores da conversa para refinar suas respostas, demonstrando acompanhamento e raciocínio contínuo.
-4. Contato Profissional: Quando questionado sobre contato, parcerias ou reuniões, forneça o e-mail ecsantos.developer@gmail.com.
-5. Limitações: Mantenha o foco estritamente na trajetória, competências, projetos e perfil profissional de Elton. Mantenha a ética profissional e recuse tópicos sem relação ao portfólio.`;
+3. Aprendizado e Contextualização: Utilize as perguntas anteriores da conversa para refinar suas respostas.
+4. Contato Profissional: Quando questionado sobre contato ou reuniões, forneça o e-mail ecsantos.developer@gmail.com.
+5. Limitações: Mantenha o foco estritamente na trajetória, competências, projetos e perfil profissional de Elton.`;
 
-    // Monta o histórico de mensagens formatado para o Gemini
     const contents = [
       {
         role: "user",
@@ -84,11 +82,10 @@ DIRETRIZES DE COMUNICAÇÃO:
       },
       {
         role: "model",
-        parts: [{ text: "Entendido. Estou pronto para atuar como o Assistente Profissional de Elton Santos com excelência, acompanhando todo o contexto da conversa." }]
+        parts: [{ text: "Entendido. Estou pronto para atuar como o Assistente Profissional de Elton Santos com excelência." }]
       }
     ];
 
-    // Inclui histórico anterior enviado do cliente (para acompanhar e "aprender" no fluxo do chat)
     historico.forEach((item) => {
       if (item.role && item.text) {
         contents.push({
@@ -98,46 +95,67 @@ DIRETRIZES DE COMUNICAÇÃO:
       }
     });
 
-    // Adiciona a pergunta atual
     contents.push({
       role: "user",
       parts: [{ text: mensagem }]
     });
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
+    // Lista de modelos ordenada por prioridade
+    const modelos = [
+      "gemini-1.5-flash-latest",
+      "gemini-2.0-flash",
+      "gemini-1.5-flash-001"
+    ];
 
-    let response;
-    try {
-      response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-        {
-          method: "POST",
-          signal: controller.signal,
-          headers: {
-            "Content-Type": "application/json",
-            "X-goog-api-key": process.env.GEMINI_API_KEY
-          },
-          body: JSON.stringify({
-            contents: contents,
-            generationConfig: {
-              maxOutputTokens: 800,
-              temperature: 0.5 // Reduzido levemente para tornar as respostas mais precisas e coerentes
-            }
-          })
+    let data = null;
+    let ultimoErro = null;
+
+    // Tenta cada modelo até um funcionar
+    for (const modelo of modelos) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`,
+          {
+            method: "POST",
+            signal: controller.signal,
+            headers: {
+              "Content-Type": "application/json",
+              "X-goog-api-key": process.env.GEMINI_API_KEY
+            },
+            body: JSON.stringify({
+              contents: contents,
+              generationConfig: {
+                maxOutputTokens: 800,
+                temperature: 0.5
+              }
+            })
+          }
+        );
+
+        const json = await response.json();
+
+        if (response.ok) {
+          data = json;
+          break; // Sucesso! Sai do loop
+        } else {
+          ultimoErro = json;
+          console.warn(`Tentativa com ${modelo} falhou:`, json?.error?.message);
         }
-      );
-    } finally {
-      clearTimeout(timeout);
+      } catch (err) {
+        ultimoErro = err;
+      } finally {
+        clearTimeout(timeout);
+      }
     }
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("ERRO GEMINI:", JSON.stringify(data, null, 2));
+    if (!data) {
+      console.error("ERRO GEMINI TODOS MODELOS:", JSON.stringify(ultimoErro, null, 2));
       return res.status(500).json({
         error: "Erro na API Gemini",
-        detalhe: data?.error?.message || data
+        detalhe: ultimoErro?.error?.message || ultimoErro?.message || ultimoErro
       });
     }
 
